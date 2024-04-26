@@ -27,26 +27,29 @@ class Program
                 {
                     case 1: 
                         Console.WriteLine("Thanks for choosing a valid option. Running 'Hello World!' which just writes the text Hello World!");
-                        HelloWorld();
+                        HelloWorld.ItsJustHelloWorld();  //calls HelloWorld.cs
                         break;
                     case 2:
                         Console.WriteLine("Thanks for choosing a valid option."); 
                         Console.WriteLine("Running 'FizzBuzz' which writes #'s from 1 to 100");
                         Console.WriteLine("replacing multiples of 3 with 'Fizz', of 5 with 'Buzz', and of both with 'FizzBuzz'");
-                        FizzBuzz();
+                        Console.WriteLine("");
+                        FizzBuzz.DoFizzBuzz(); //calls Fizzbuzz.cs
+                        Console.WriteLine("");
                         break;
                     case 3:
                         Console.WriteLine("Thanks for choosing the Weekly Meal Planner Entry option!");
-                        Console.WriteLine("Here you can enter 7 meal options");
-                        Console.WriteLine("Please enter meal one");
+                        MealPlanner.EnterMeals();
                         break;
                     case 4:
                         Console.WriteLine("Thanks for choosing the Weekly Meal Planner Update option!");
                         Console.WriteLine("Here you can update your meal options");
+                        MealPlanner.MealUpdate();
                         break;
                      case 5:
                         Console.WriteLine("Thanks for choosing the Weekly Meal Planner Selection option!");
                         Console.WriteLine("Here you can randomly select one of your entered meal options");
+                        MealPlanner.MealChoice();
                         break;
                      case 6:
                         exitProgram = true;
@@ -56,10 +59,10 @@ class Program
                         break;
                 }
             }
-            catch (System.Exception e)
+            catch (System.Exception oops)
             {
                 bool didUserRespondCorrectly = false;
-                Console.WriteLine($"{e.Message}");
+                Console.WriteLine($"{oops.Message}");
                 Console.WriteLine("Please enter a valid whole number");
             do
             {
@@ -83,32 +86,4 @@ class Program
             }
         } while(exitProgram ==false);
     }
-
-    public static void HelloWorld()
-    {
-        Console.WriteLine("Hello, World!");
-    }
-
-    public static void FizzBuzz()
-    {
-         for (int i = 1; i <= 100; i++) //start at 1, loop to 100
-            {
-                if (i % 3 == 0 && i % 5 == 0) //for the #'s evenly divisible by 3 and 5
-                {
-                    Console.WriteLine("FizzBuzz");
-                }
-                else if (i % 3 == 0) //for the #'s evenly divisible by 3 only
-                {
-                    Console.WriteLine("Fizz");
-                }
-                else if (i % 5 == 0) //for the #'s evenly divisible by 5 only
-                {       
-                    Console.WriteLine("Buzz");
-                }
-                else
-                {
-                    Console.WriteLine(i); //for all other #'s
-                }
-            }
-    }
-
+}
