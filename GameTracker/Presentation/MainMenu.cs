@@ -7,9 +7,9 @@ namespace GameTracker.Presentation;
 
 public class MainMenu
 {
-    public static User existingUser =new();
+    public static User existingUser = new();
 
-    public static object StartMenu()
+    public static void StartMenu()
     {
         int userChoice = 0;
         bool validInput = true;
@@ -45,18 +45,18 @@ public class MainMenu
                     /**********add an "Easter Egg" if I have time...************
                     case "Meeple":
                     ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ ⣀⣀⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀                     ⢠⣾⣿⣿⣿⣿⣷⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀                     ⣿⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀                     ⢀⣠⣴⣾⣿⣿⣿⣿⣿⣿⣿⣿⣷⣦⣄⡀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀                    ⣠⣴⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣦⣄⠀⠀⠀⠀
-⠀⠀                    ⢠⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⡄⠀⠀
-⠀⠀                    ⠘⠻⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠟⠃⠀⠀
-⠀⠀⠀⠀⠀⠀                     ⠉⣽⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣯⠉⠀⠀⠀⠀⠀⠀
-                        ⠀⠀⠀⢠⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⡄⠀⠀⠀⠀⠀
-                        ⠀⠀⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣦⠀⠀⠀⠀
-                        ⢀⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⠏⠀⠀⠹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⡀⠀⠀
-                        ⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⠏⠀⠀⠀⠀⠹⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀
-                        ⠈⠉⠉⠉⠉⠉⠉⠉⠉⠉⠀⠀⠀⠀⠀⠀⠉⠉⠉⠉⠉⠉⠉⠉⠉⠁
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀           Console.WriteLine("            ⢠⣾⣿⣿⣿⣿⣷⡄");⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀           Console.WriteLine(            ⣿⣿⣿⣿⣿⣿⣿⣿⠀⠀")';⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀                 Console.WriteLine(       ⢀⣠⣴⣾⣿⣿⣿⣿⣿⣿⣿⣿⣷⣦⣄⡀⠀⠀");⠀⠀⠀⠀⠀
+⠀⠀⠀⠀                    Console.WriteLine(   ⣠⣴⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣦⣄⠀⠀");⠀
+⠀⠀                    Console.WriteLine(   ⢠⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⡄⠀⠀");
+⠀⠀                    Console.WriteLine(⠘⠻⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠟⠃⠀⠀");
+⠀⠀⠀⠀⠀⠀                     Console.WriteLine(⠉⣽⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣯⠉⠀⠀⠀⠀");⠀⠀
+                        ⠀⠀⠀Console.WriteLine(⢠⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⡄⠀⠀⠀⠀");⠀
+                        ⠀⠀Console.WriteLine(⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣦⠀⠀⠀");⠀
+                        Console.WriteLine(⢀⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⠏⠀⠀⠹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⡀⠀");⠀
+                        Console.WriteLine(⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⠏⠀⠀⠀⠀⠹⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀");⠀
+                        Console.WriteLine(⠈⠉⠉⠉⠉⠉⠉⠉⠉⠉⠀⠀⠀⠀⠀⠀⠉⠉⠉⠉⠉⠉⠉⠉⠉⠁");
 
                     Console.WriteLine("Congratulations, you found the hidden Meeple! Hit any key to return to the menu.");
                     return.
@@ -108,7 +108,7 @@ public class MainMenu
                 existingUser = UserController.CreateUser(userInput);
                 Console.WriteLine("Profile created!");
                 validInput = true;
-        
+
             }
 
         } while (!validInput);
