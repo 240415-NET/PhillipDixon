@@ -22,10 +22,9 @@ public class GameController
         return _GameData.GetGames(userID, 1);
     }
 
-    /* ********************************Remove Game code. Currently a WIP. ***************************************************
-        public static void RemoveItem(Guid _gameId, User _user)
+    // ********************************Remove Game code. Currently a WIP. ***************************************************
+        public static void RemoveGame(Guid _gameId, User _user)
         {
-            //retrieve full list from JSON
             GamesDTO returnedDTO = DTOStorage.DeserializeAllGames();
 
              if(returnedDTO != null)
@@ -48,9 +47,9 @@ public class GameController
             Console.ReadLine();
             GameMenu.GameFunctionMenu(_user);
         }
-    */
+    //*/
 
-    /******************Remove Game code start. Currently WIP**********************************
+    //******************Remove Game code start. Currently WIP**********************************
     public static class ModifyGames
     {
         public static void ModifyIndividualGame(Game gameToBeModified, string newGameName, List<Game> gamesToBeModified)
@@ -59,13 +58,13 @@ public class GameController
             gamesToBeModified.Add(gameToBeModified);
         }
 
-        public static void ModifyGamesFromList(List<Game> gamesToBeModified)
+        public static void ModifyGamesFromList(List<Game> gamesToBeModified, User user)
         {
             IGameStorageRepo gameStorage = new JsonGameStorage();
             foreach (Game game in gamesToBeModified)
             {
-                GameController.RemoveGame(game.userId, game.gameId)
-            Console.WriteLine($"{game.gameId} was removed!");
+                GameController.RemoveGame(game.gameId, user);
+                Console.WriteLine($"{game.gameId} was removed!");
 
                 gameStorage.StoreGame(game);
                 Console.WriteLine($"{game.gameId} was re-added with {game.gameName}");

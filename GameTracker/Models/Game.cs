@@ -3,7 +3,7 @@ namespace GameTracker.Models;
 public class Game
 {
     public Guid userId {get; set;}
-    public Guid GameId {get; set;}
+    public Guid gameId {get; set;}
     public string gameName {get; set;}
     public double originalCost {get; set;}
     public DateTime purchaseDate {get; set;}
@@ -14,7 +14,7 @@ public class Game
     public Game(Guid _userId, string _gameName, double _originalCost, DateTime _purchaseDate) 
     {
             userId = _userId;
-            GameId = Guid.NewGuid();
+            gameId = Guid.NewGuid();
             gameName = _gameName;
             originalCost = _originalCost;
             purchaseDate = _purchaseDate;

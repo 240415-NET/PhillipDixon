@@ -36,6 +36,8 @@ public class DTOStorage
     }
      public static void SerializeGame(List<Game> existingGameList)
     {
+        
+        //GamesDTO existingDTO = new GamesDTO(existingGameList);
         string existingDTOJson = File.ReadAllText(filePath);
 
         GamesDTO existingDTO = JsonSerializer.Deserialize<GamesDTO>(existingDTOJson);
@@ -46,7 +48,7 @@ public class DTOStorage
 
         File.WriteAllText(filePath, existingDTOJson);
     }
-    /* *****************used for WIP Remove Items functionality******************************
+    //*****************used for WIP Remove Games functionality******************************
         public static GamesDTO DeserializeAllGames()
     {
         GamesDTO allGames = new();
@@ -69,5 +71,5 @@ public class DTOStorage
         string refreshListOfGames = JsonSerializer.Serialize(passedListOfGames);
         File.WriteAllText(filePath, refreshListOfGames);
     }
-    */ 
+    //*/ 
 }

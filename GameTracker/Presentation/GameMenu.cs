@@ -32,16 +32,16 @@ public class GameMenu
                         break;
                     case "3":
                         //***Below line is for the WIP Remove functionality***
-                        //GameController.RemoveGame(ViewAllGames(user.userId,1,"Which item would you like to delete?"), user);
-                        Console.WriteLine("Phillip hasn't implemented this yet. Guess you're keeping that game...");
-                        Console.WriteLine("Choose a different option");
+                        GameController.RemoveGame(ViewMyGames(user.userId, 1, "Which game would you like to remove"), user);
+                        //Console.WriteLine("Phillip hasn't implemented this yet. Guess you're keeping that game...");
+                        //Console.WriteLine("Choose a different option");
                         break;
                     case "4":
-                        /*************************New Modify code WIP************************
-                        ModifyItemMenu(user);
-                        */
-                        Console.WriteLine("Phillip hasn't implemented this yet. Guess you should have entered that info correctly...");
-                        Console.WriteLine("Choose a different option");
+                        //*************************New Modify code WIP************************
+                        ModifyGameMenu(user);
+                        //*/
+                        //Console.WriteLine("Phillip hasn't implemented this yet. Guess you should have entered that info correctly...");
+                        //Console.WriteLine("Choose a different option");
                         break;
                     case "5":
                         Console.WriteLine("Thanks for using the GameTracker app! Bye!");
@@ -177,7 +177,7 @@ public class GameMenu
                     }
                     else if (userChoice <= allMyGames.Count() && userChoice > 0)
                     {
-                        return allMyGames[userChoice - 1].GameId;
+                        return allMyGames[userChoice - 1].gameId;
                     }
                     else
                     {
@@ -198,14 +198,14 @@ public class GameMenu
     {
         List<Game> allMyGames = GameController.GetGames(userID);
         Console.Clear();
-        var SpecificGame = allMyGames.Where(x => x.GameId.Equals(GameID));
+        var SpecificGame = allMyGames.Where(x => x.gameId.Equals(GameID));
         foreach (var thing in SpecificGame)
         {
             Console.WriteLine(thing);
         }
         Console.ReadKey();
     }
-/************************Modify Game code WIP*********************************************
+//************************Modify Game code WIP*********************************************
 public static void ModifyGameMenu(User user)
     {
         bool keepGoing = false;
@@ -214,10 +214,10 @@ public static void ModifyGameMenu(User user)
 
         do
         {
-            Guid gameId = ViewAllGames(user.userId, 1, "Please select the game you'd like to modify");
+            Guid gameId = ViewMyGames(user.userId, 1, "Please select the game you'd like to modify");
             Game? gameToBeModified = allUsersGames.FirstOrDefault(x => x.gameId.Equals(gameId));
             ModifyIndividualGameDisplay(gameToBeModified, modifyGameList, user);
-            ModifyGames.ModifyGamesFromList(modifyGameList);
+            GameController.ModifyGames.ModifyGamesFromList(modifyGameList, user);
             Console.WriteLine("Please press enter to continue modifying, or 0 to exit.");
             string keepModifying = Console.ReadLine() ?? "";
             keepGoing = keepModifying == "";
@@ -225,16 +225,15 @@ public static void ModifyGameMenu(User user)
         while (keepGoing);
     }
 
-    public static List<Game> ModifyIndividualItemDisplay(Game gameToBeModified, List<Game> modifyGameList, User user)
+    public static List<Game> ModifyIndividualGameDisplay(Game gameToBeModified, List<Game> modifyGameList, User user)
     {
         Console.WriteLine($"Current Game Name: {gameToBeModified.gameName}");
         Console.WriteLine("Please enter the new game name: ");
         string modifiedGameName = Console.ReadLine() ?? "";
 
-        //Call a method to add the modifiedItem to a List ModifyItemController.
-        ModifyGames.ModifyIndividualGame(gameToBeModified, modifiedGameName, modifyGameList);
+        GameController.ModifyGames.ModifyIndividualGame(gameToBeModified, modifiedGameName, modifyGameList);
 
         return modifyGameList;
     }
-******************End Modify Game Code WIP**********************************/
+//******************End Modify Game Code WIP**********************************/
 }

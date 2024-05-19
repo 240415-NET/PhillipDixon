@@ -24,6 +24,9 @@ public class JsonGameStorage : IGameStorageRepo
         existingGamesList.Add(newGame);
 
         DTOStorage.SerializeGame(existingGamesList);
+    
+
+        
     }
     public List<Game> GetGames(Guid userID, int listType)
     {

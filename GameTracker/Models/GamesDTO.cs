@@ -8,4 +8,9 @@ public class GamesDTO
     {
         this.Games = new List<Game>();
     }
+
+    public GamesDTO(List<Game>Games)
+    {
+        this.Games = Games;
+    }
 }
