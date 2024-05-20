@@ -5,7 +5,7 @@ namespace GameTracker.Controllers;
 
 public class UserController
 {
-    private static IUserStorageRepo _userData = new JsonUserStorage();
+    private static IUserStorageRepo _userData = new SqlUserStorage();
     public static User CreateUser(string userName)
     {
         User newUser = new User(userName);
