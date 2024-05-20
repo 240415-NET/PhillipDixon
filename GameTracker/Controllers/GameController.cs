@@ -23,7 +23,7 @@ public class GameController
     }
 
     // ********************************Remove Game code. Currently a WIP. ***************************************************
-        public static void RemoveGame(Guid _gameId, User _user)
+        public static void RemoveGame(Guid _gameId, User _user, bool pauseAtTheEnd = false)
         {
             GamesDTO returnedDTO = DTOStorage.DeserializeAllGames();
 
@@ -36,7 +36,7 @@ public class GameController
                 if(deleteGame.Count > 0)
                 {
                     returnedDTO.Games.Remove(deleteGame[0]);
-                    Console.WriteLine($"{deleteGame[0].AbbrToString()}  has been removed. Press any key to continue.");
+                    Console.WriteLine($"{deleteGame[0].AbbrToString()}  has been removed. Press any key to continue.");//should be in Presentation
                 }
                 DTOStorage.SerializeAllGames(returnedDTO);
             }else
@@ -44,8 +44,12 @@ public class GameController
                 Console.WriteLine("No games found");
             }
 
-            Console.ReadLine();
-            GameMenu.GameFunctionMenu(_user);
+            if (pauseAtTheEnd)
+                {
+                    Console.ReadLine();
+                }
+            //Console.ReadLine();
+            //GameMenu.GameFunctionMenu(_user); ///move
         }
     //*/
 

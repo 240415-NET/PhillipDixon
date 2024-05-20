@@ -12,29 +12,25 @@ public class GameMenu
         string userInput;
         bool validInput = false;
 
-        Console.Clear();
-
-        Console.Write("Please select from the following Options:\n1. View List of Games\n2. New Game\n3. Remove Game\n4. Modify Game\n5. Exit Game Tracker\n");
         try
         {
             do
             {
+                Console.Clear();
+                Console.Write("Please select from the following Options:\n1. View List of Games\n2. New Game\n3. Remove Game\n4. Modify Game\n5. Exit Game Tracker\n");
+
                 userInput = Console.ReadLine().Trim().ToLower();
                 switch (userInput)
                 {
                     case "1":
                         ViewGameMenu(user.userId);
-                        validInput = true;
                         break;
                     case "2":
-                        validInput = true;
                         NewEntry(user);
                         break;
                     case "3":
                         //***Below line is for the WIP Remove functionality***
-                        GameController.RemoveGame(ViewMyGames(user.userId, 1, "Which game would you like to remove"), user);
-                        //Console.WriteLine("Phillip hasn't implemented this yet. Guess you're keeping that game...");
-                        //Console.WriteLine("Choose a different option");
+                        GameController.RemoveGame(ViewMyGames(user.userId, 1, "Which game would you like to remove"), user, true);
                         break;
                     case "4":
                         //*************************New Modify code WIP************************
@@ -173,7 +169,7 @@ public class GameMenu
                     int userChoice = Convert.ToInt32(userInput);
                     if (userChoice == loopCount)
                     {
-                        exitView = true;
+                        return Guid.Empty;
                     }
                     else if (userChoice <= allMyGames.Count() && userChoice > 0)
                     {
@@ -205,8 +201,8 @@ public class GameMenu
         }
         Console.ReadKey();
     }
-//************************Modify Game code WIP*********************************************
-public static void ModifyGameMenu(User user)
+    //************************Modify Game code WIP*********************************************
+    public static void ModifyGameMenu(User user)
     {
         bool keepGoing = false;
         List<Game> allUsersGames = GameController.GetGames(user.userId);
@@ -215,12 +211,19 @@ public static void ModifyGameMenu(User user)
         do
         {
             Guid gameId = ViewMyGames(user.userId, 1, "Please select the game you'd like to modify");
-            Game? gameToBeModified = allUsersGames.FirstOrDefault(x => x.gameId.Equals(gameId));
-            ModifyIndividualGameDisplay(gameToBeModified, modifyGameList, user);
-            GameController.ModifyGames.ModifyGamesFromList(modifyGameList, user);
-            Console.WriteLine("Please press enter to continue modifying, or 0 to exit.");
-            string keepModifying = Console.ReadLine() ?? "";
-            keepGoing = keepModifying == "";
+            if (gameId == Guid.Empty)
+            {
+                keepGoing = false;
+            }
+            else
+            {
+                Game? gameToBeModified = allUsersGames.FirstOrDefault(x => x.gameId.Equals(gameId));
+                ModifyIndividualGameDisplay(gameToBeModified, modifyGameList, user);
+                GameController.ModifyGames.ModifyGamesFromList(modifyGameList, user);
+                Console.WriteLine("Please press enter to continue modifying, or 0 to exit.");
+                string keepModifying = Console.ReadLine() ?? "";
+                keepGoing = keepModifying == "";
+            }
         }
         while (keepGoing);
     }
@@ -235,5 +238,5 @@ public static void ModifyGameMenu(User user)
 
         return modifyGameList;
     }
-//******************End Modify Game Code WIP**********************************/
+    //******************End Modify Game Code WIP**********************************/
 }
