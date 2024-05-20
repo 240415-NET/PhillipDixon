@@ -1,3 +1,5 @@
+using GameTracker.Presentation;
+
 namespace GameTracker.Documentation;
 
 class GameTrackerManual
@@ -5,14 +7,15 @@ class GameTrackerManual
     public static void UsageInstructions()
     {
         Console.WriteLine("Welcome to GameTraker!");
-        Console.WriteLine("Documentation for use will be written here");
-        Console.WriteLine("It's not done yet, though, so stay tuned!");
+        Console.WriteLine("This app will allow users to track their owned games, when they were purchased, and their cost.");
+        Console.WriteLine("if you have never logged into the app before, Choose option 2. New User from the Main Menu.");
+        Console.WriteLine("If you have logged in before, Choose option 3 and enter your user name.");
+        Console.WriteLine("You will be taken to the Game Menu once you have created a new user or logged in as an existing user.");
+        Console.WriteLine("On the Game Menu, you can choose to view your exisiting game list, add a new game, or modify the name of an existing one.");
+        Console.WriteLine("For a new game, you will enter the game's name, its price, and the date of purchase");
+        Console.WriteLine("Modify game will allow you to update the game's name.");
         Console.WriteLine(" ");
-        Console.WriteLine(" ");
-        Console.WriteLine(" ");
-        Console.WriteLine(" ");
-        Console.WriteLine(" ");
-        Console.WriteLine(" ");
-        Console.WriteLine(" ");
+        Console.WriteLine("Press any key to return to the main menu");
+        Console.ReadKey();
     }
 }

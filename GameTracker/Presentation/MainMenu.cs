@@ -1,4 +1,4 @@
-using System.Net;
+
 using GameTracker.Controllers;
 using GameTracker.Models;
 using GameTracker.Documentation;
@@ -11,10 +11,18 @@ public class MainMenu
 
     public static void StartMenu()
     {
-        int userChoice = 0;
+        string userChoice = "";
         bool validInput = true;
 
         Console.WriteLine("Welcome to Gametracker!");
+        Console.WriteLine("   .-------.    ______");
+        Console.WriteLine("  /   o   /|   /\\     \\");
+        Console.WriteLine(" /_______/o|  /o \\  o  \\");
+        Console.WriteLine(" | o     | | /   o\\_____\\");
+        Console.WriteLine(" |   o   |o/ \\o   /o    /");
+        Console.WriteLine(" |     o |/   \\ o/     /");
+        Console.WriteLine(" '-------'     \\/____o/");
+        Console.WriteLine("");
         Console.WriteLine("1. Intructions for use");
         Console.WriteLine("2. New user");
         Console.WriteLine("3. Returning user");
@@ -24,43 +32,24 @@ public class MainMenu
         {
             try
             {
-                userChoice = Convert.ToInt32(Console.ReadLine());
+                userChoice = Console.ReadLine().Trim().ToLower();
                 validInput = true;
 
                 switch (userChoice)
                 {
-                    case 1:
+                    case "1":
                         GameTrackerManual.UsageInstructions();
                         break;
-                    case 2:
+                    case "2":
                         UserCreationMenu();
                         GameMenu.GameFunctionMenu(existingUser);
                         break;
-                    case 3:
+                    case "3":
                         UserLoginMenu();
                         GameMenu.GameFunctionMenu(existingUser);
                         break;
-                    case 4:
+                    case "4":
                         return;
-                    /**********add an "Easter Egg" if I have time...************
-                    case "Meeple":
-                    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ ⣀⣀⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀           Console.WriteLine("            ⢠⣾⣿⣿⣿⣿⣷⡄");⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀           Console.WriteLine(            ⣿⣿⣿⣿⣿⣿⣿⣿⠀⠀")';⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀                 Console.WriteLine(       ⢀⣠⣴⣾⣿⣿⣿⣿⣿⣿⣿⣿⣷⣦⣄⡀⠀⠀");⠀⠀⠀⠀⠀
-⠀⠀⠀⠀                    Console.WriteLine(   ⣠⣴⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣦⣄⠀⠀");⠀
-⠀⠀                    Console.WriteLine(   ⢠⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⡄⠀⠀");
-⠀⠀                    Console.WriteLine(⠘⠻⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠟⠃⠀⠀");
-⠀⠀⠀⠀⠀⠀                     Console.WriteLine(⠉⣽⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣯⠉⠀⠀⠀⠀");⠀⠀
-                        ⠀⠀⠀Console.WriteLine(⢠⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⡄⠀⠀⠀⠀");⠀
-                        ⠀⠀Console.WriteLine(⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣦⠀⠀⠀");⠀
-                        Console.WriteLine(⢀⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⠏⠀⠀⠹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⡀⠀");⠀
-                        Console.WriteLine(⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⠏⠀⠀⠀⠀⠹⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀");⠀
-                        Console.WriteLine(⠈⠉⠉⠉⠉⠉⠉⠉⠉⠉⠀⠀⠀⠀⠀⠀⠉⠉⠉⠉⠉⠉⠉⠉⠉⠁");
-
-                    Console.WriteLine("Congratulations, you found the hidden Meeple! Hit any key to return to the menu.");
-                    return.
-                    */
                     default:
                         Console.WriteLine("Please enter a valid choice!");
                         validInput = false;

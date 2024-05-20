@@ -9,7 +9,7 @@ public class DTOStorage
 
     public static List<Game> DeserializeGame()
     {
-        List<Game?> existingGameList = new List<Game>();
+        List<Game?> existingGameList = [];
         try
         {
             if (File.Exists(filePath))

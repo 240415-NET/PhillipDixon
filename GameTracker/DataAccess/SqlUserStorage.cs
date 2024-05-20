@@ -9,7 +9,45 @@ public class SqlUserStorage : IUserStorageRepo
 
     public User FindUser(string usernameToFind)
     {
-        throw new NotImplementedException();
+        User foundUser = new User();
+        using SqlConnection connection = new SqlConnection(connectionString);
+
+        try
+        {
+            
+            connection.Open();
+
+            string commandText = @"SELECT userId, userName FROM dbo.Users
+                            WHERE userName = @userNameToFind;";
+
+            using SqlCommand sqlCommand= new SqlCommand (commandText, connection);
+            sqlCommand.Parameters.AddWithValue("@userNameToFind", usernameToFind);
+
+            using SqlDataReader reader = sqlCommand.ExecuteReader();
+            while(reader.Read())
+            {
+                foundUser.userId = reader.GetGuid(0);
+                foundUser.userName = reader.GetString(1);
+            }
+
+            connection.Close();
+
+            if(String.IsNullOrEmpty(foundUser.userName))
+            {
+                return null;
+            }
+
+            return foundUser;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
+        finally
+        {
+            connection.Close();   
+        }
+        return null;
     }
 
     public void StoreUser(User user)
