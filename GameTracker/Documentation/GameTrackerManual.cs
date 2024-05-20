@@ -15,7 +15,9 @@ class GameTrackerManual
         Console.WriteLine("For a new game, you will enter the game's name, its price, and the date of purchase");
         Console.WriteLine("Modify game will allow you to update the game's name.");
         Console.WriteLine(" ");
-        Console.WriteLine("Press any key to return to the main menu");
+        Console.WriteLine(" ");
+        Console.WriteLine("Choose an option to continue:");
+        Console.WriteLine("2. New User 3. Returning User 4. Exit Program");
         Console.ReadKey();
     }
 }

@@ -19,9 +19,9 @@ public class MainMenu
         Console.WriteLine("  /   o   /|   /\\     \\");
         Console.WriteLine(" /_______/o|  /o \\  o  \\");
         Console.WriteLine(" | o     | | /   o\\_____\\");
-        Console.WriteLine(" |   o   |o/ \\o   /o    /");
-        Console.WriteLine(" |     o |/   \\ o/     /");
-        Console.WriteLine(" '-------'     \\/____o/");
+        Console.WriteLine(" |   o   |o/ \\o   /o   o/");
+        Console.WriteLine(" |     o |/   \\ o/  o  /");
+        Console.WriteLine(" '-------'     \\/o___o/");
         Console.WriteLine("");
         Console.WriteLine("1. Intructions for use");
         Console.WriteLine("2. New user");
@@ -39,6 +39,7 @@ public class MainMenu
                 {
                     case "1":
                         GameTrackerManual.UsageInstructions();
+                        validInput = false;
                         break;
                     case "2":
                         UserCreationMenu();
