@@ -29,15 +29,10 @@ public class GameMenu
                         NewEntry(user);
                         break;
                     case "3":
-                        //***Below line is for the WIP Remove functionality***
-                        GameController.RemoveGame(ViewMyGames(user.userId, 1, "Which game would you like to remove"), user, true);
+                        DeleteGameMenu(user);
                         break;
                     case "4":
-                        //*************************New Modify code WIP************************
                         ModifyGameMenu(user);
-                        //*/
-                        //Console.WriteLine("Phillip hasn't implemented this yet. Guess you should have entered that info correctly...");
-                        //Console.WriteLine("Choose a different option");
                         break;
                     case "5":
                         Console.WriteLine("Thanks for using the GameTracker app! Bye!");
@@ -75,7 +70,7 @@ public class GameMenu
                 entrySuccess = true;
                 GameController.CreateGame(user, gameName, originalCost, purchaseDate);
                 Console.WriteLine("Game added!");
-                GameFunctionMenu(user);
+                //GameFunctionMenu(user);
             }
             catch (Exception e)
             {
@@ -88,7 +83,7 @@ public class GameMenu
 
     public static void ViewGameMenu(Guid userID)
     {
-        Guid myReturnedGuid;
+        Game myReturnedGame;
         bool exitViewMenu = false;
         do
         {
@@ -111,8 +106,8 @@ public class GameMenu
                     switch (userChoice)
                     {
                         case 1:
-                            myReturnedGuid = ViewMyGames(userID, 1);
-                            if (myReturnedGuid != Guid.Empty) { ViewSpecifiedGameDetails(userID, myReturnedGuid); }
+                            myReturnedGame = ViewMyGames(userID, 1);
+                            if (myReturnedGame.gameId != Guid.Empty) { ViewSpecifiedGameDetails(userID, myReturnedGame); }
                             break;
                         case 2:
                             exitViewMenu = true;
@@ -134,10 +129,10 @@ public class GameMenu
             }
         } while (!exitViewMenu);
     }
-    public static Guid ViewMyGames(Guid userID, int abbreviatedList = 0, string messageToUser = "Which Game would you like to view?")
+    public static Game ViewMyGames(Guid userID, int abbreviatedList = 0, string messageToUser = "Which Game would you like to view?")
     {
         List<Game> allMyGames = GameController.GetGames(userID);
-        if (allMyGames.Count() < 1)
+        if (allMyGames.Count < 1)
         {
             Console.WriteLine("You have not added any games to your list...");
             Console.ReadKey();
@@ -169,11 +164,11 @@ public class GameMenu
                     int userChoice = Convert.ToInt32(userInput);
                     if (userChoice == loopCount)
                     {
-                        return Guid.Empty;
+                        return new Game();
                     }
                     else if (userChoice <= allMyGames.Count() && userChoice > 0)
                     {
-                        return allMyGames[userChoice - 1].gameId;
+                        return allMyGames[userChoice - 1];
                     }
                     else
                     {
@@ -188,55 +183,97 @@ public class GameMenu
                 }
             } while (!exitView);
         }
-        return Guid.Empty;
+        return new Game();
     }
-    public static void ViewSpecifiedGameDetails(Guid userID, Guid GameID)
+    public static void ViewSpecifiedGameDetails(Guid userID, Game Game)
     {
         List<Game> allMyGames = GameController.GetGames(userID);
         Console.Clear();
-        var SpecificGame = allMyGames.Where(x => x.gameId.Equals(GameID));
-        foreach (var thing in SpecificGame)
-        {
-            Console.WriteLine(thing);
-        }
+        Console.WriteLine(Game);
         Console.ReadKey();
     }
-    //************************Modify Game code WIP*********************************************
-    public static void ModifyGameMenu(User user)
+    public static void DeleteGameMenu(User user)
     {
-        bool keepGoing = false;
         List<Game> allUsersGames = GameController.GetGames(user.userId);
         List<Game> modifyGameList = new();
+        Game removeGame = ViewMyGames(user.userId, 1, "Please select the game you'd like to remove");
+        GameController.RemoveGame(removeGame);
+        //Game? gameToBeDeleted = allUsersGames.FirstOrDefault(x => x.gameId.Equals(gameId));
 
+    }
+        public static void ModifyGameMenu(User user)
+    {
+        //List<Game> allUsersGames = GameController.GetGames(user.userId);
+
+        Game gameToBeModified = ViewMyGames(user.userId, 1, "Please select the game you'd like to modify");
+        //Game? gameToBeModified = allUsersGames.FirstOrDefault(x => x.gameId.Equals(modifyGameId));
+        ModifyIndividualGameDisplay(gameToBeModified, user);
+    }
+    public static void ModifyIndividualGameDisplay(Game gameToBeModified, User user)
+    {
+        bool keepModifying = true;
+        bool isValid = false;
+
+        Game modifiedGame = new Game();
+        modifiedGame.gameId = gameToBeModified.gameId;
+        modifiedGame.gameName = gameToBeModified.gameName;
+        modifiedGame.originalCost = gameToBeModified.originalCost;
+        modifiedGame.purchaseDate = gameToBeModified.purchaseDate;
         do
         {
-            Guid gameId = ViewMyGames(user.userId, 1, "Please select the game you'd like to modify");
-            if (gameId == Guid.Empty)
+            Console.WriteLine("Please select which value you'd like to modify:");
+            Console.WriteLine($"1. Game Name: {modifiedGame.gameName}");
+            Console.WriteLine($"2. Original Cost: {modifiedGame.originalCost}");
+            Console.WriteLine($"3. Purchase Date: {modifiedGame.purchaseDate}");
+            Console.WriteLine("0. Finished modifying");
+            try
             {
-                keepGoing = false;
+                switch (Console.ReadLine())
+                {
+                    case "1":
+                        {
+                            Console.WriteLine("Please enter the new value: ");
+                            string modifiedValue = Console.ReadLine() ?? "";
+                            modifiedGame.gameName = modifiedValue;
+                            isValid = true;
+                            break;
+                        }
+                    case "2":
+                        {
+                            Console.WriteLine("Please enter the new number with no currency sign");
+                            double modifiedValue = double.Parse(Console.ReadLine() ?? "");
+                            modifiedGame.originalCost = modifiedValue;
+                            isValid = true;
+                            break;
+                        }
+                    case "3":
+                        {
+                            Console.WriteLine($"Please enter the new value with proper formatting -- i.e. 12/25/2001");
+                            DateTime modifiedValue = DateTime.Parse(Console.ReadLine().Trim());
+                            modifiedGame.purchaseDate = modifiedValue;
+                            isValid = true;
+                            break;
+                        }
+                    case "0":
+                        {
+                            keepModifying = false;
+                            isValid = true;
+                            break;
+                        }
+                    default:
+                        {
+                            isValid = false;
+                            break;
+                        }
+                }
             }
-            else
+            catch (Exception)
             {
-                Game? gameToBeModified = allUsersGames.FirstOrDefault(x => x.gameId.Equals(gameId));
-                ModifyIndividualGameDisplay(gameToBeModified, modifyGameList, user);
-                GameController.ModifyGames.ModifyGamesFromList(modifyGameList, user);
-                Console.WriteLine("Please press enter to continue modifying, or 0 to exit.");
-                string keepModifying = Console.ReadLine() ?? "";
-                keepGoing = keepModifying == "";
+                Console.WriteLine("You've entered an invalid value. Please verify you'd entered the correct format.\n");
             }
         }
-        while (keepGoing);
+        while (keepModifying || !isValid);
+
+        GameController.ModifyGame(modifiedGame);
     }
-
-    public static List<Game> ModifyIndividualGameDisplay(Game gameToBeModified, List<Game> modifyGameList, User user)
-    {
-        Console.WriteLine($"Current Game Name: {gameToBeModified.gameName}");
-        Console.WriteLine("Please enter the new game name: ");
-        string modifiedGameName = Console.ReadLine() ?? "";
-
-        GameController.ModifyGames.ModifyIndividualGame(gameToBeModified, modifiedGameName, modifyGameList);
-
-        return modifyGameList;
-    }
-    //******************End Modify Game Code WIP**********************************/
 }
