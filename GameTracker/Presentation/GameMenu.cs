@@ -14,7 +14,6 @@ public class GameMenu
         {
             do
             {
-                Console.Clear();
                 Console.Write("Please select from the following Options:\n\n1. View List of Games\n2. New Game\n3. Remove Game\n4. Modify Game\n");
                 Console.Write("5. Choose a random game to play\n\n6. Exit Game Tracker\n");
 
@@ -40,7 +39,7 @@ public class GameMenu
                         Console.WriteLine("Thanks for using the GameTracker app! Bye!");
                         return;
                     default:
-                        Console.WriteLine("Please key valid option(which is a single digit from 1-5)");
+                        Console.WriteLine("Please key valid option(which is a single digit from 1-6)");
                         break;
                 }
             }
@@ -113,7 +112,6 @@ public class GameMenu
                             break;
                         case 2:
                             exitViewMenu = true;
-                            //Need to figure out how to return to User Menu; may have coded myself into a corner
                             break;
                         default:
                             Console.WriteLine("You're not providing a valid input. Try again.");
@@ -199,8 +197,6 @@ public class GameMenu
         List<Game> modifyGameList = new();
         Game removeGame = ViewMyGames(user.userId, 1, "Please select the game you'd like to remove");
         GameController.RemoveGame(removeGame);
-        //Game? gameToBeDeleted = allUsersGames.FirstOrDefault(x => x.gameId.Equals(gameId));
-
     }
         public static void ModifyGameMenu(User user)
     {
@@ -267,7 +263,7 @@ public class GameMenu
             }
             catch (Exception)
             {
-                Console.WriteLine("You've entered an invalid value. Please verify you'd entered the correct format.\n");
+                Console.WriteLine("You've entered an invalid value. Please verify you've entered the correct format.\n");
             }
         }
         while (keepModifying || !isValid);
@@ -281,6 +277,9 @@ public class GameMenu
         int listNumber = rnd.Next(allMyGames.Count);
         Game randomGame = allMyGames[listNumber];
         Console.Clear();
-        Console.WriteLine($"\n\nLooks like you're playing {randomGame.gameName}!\n\n");
+        Console.Write($"\n\nLooks like you're playing ");
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.Write($"{randomGame.gameName}!\n\n");
+        Console.ResetColor();
     }
 }

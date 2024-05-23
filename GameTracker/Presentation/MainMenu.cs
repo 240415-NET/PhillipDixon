@@ -15,7 +15,11 @@ public class MainMenu
         bool validInput = true;
 
         Console.Clear();
-        Console.WriteLine("Welcome to Gametracker!");
+        Console.ForegroundColor = ConsoleColor.Blue;
+        Console.WriteLine("***************************");
+        Console.WriteLine("* Welcome to GameTracker! *");
+        Console.WriteLine("***************************");
+        Console.ResetColor();
         Console.WriteLine("   .-------.    ______");
         Console.WriteLine("  /   o   /|   /\\     \\");
         Console.WriteLine(" /_______/o|  /o \\  o  \\");
@@ -23,6 +27,8 @@ public class MainMenu
         Console.WriteLine(" |   o   |o/ \\o   /o   o/");
         Console.WriteLine(" |     o |/   \\ o/  o  /");
         Console.WriteLine(" '-------'     \\/o___o/");
+        Console.WriteLine("");
+        Console.WriteLine("Choose an option below to get started!");
         Console.WriteLine("");
         Console.WriteLine("1. Intructions for use");
         Console.WriteLine("2. New user");
@@ -80,7 +86,7 @@ public class MainMenu
 
         do
         {
-            Console.WriteLine("Please enter a username: ");
+            Console.WriteLine("What is your name?");
 
             userInput = Console.ReadLine() ?? "";
 
@@ -88,18 +94,18 @@ public class MainMenu
 
             if (String.IsNullOrEmpty(userInput))
             {
-                Console.WriteLine("Username cannot be blank, please try again.");
+                Console.WriteLine("Who do you think you are, Clint Eastwood? You need a name. Try again.");
                 validInput = false;
             }
             else if (UserController.UserExists(userInput))
             {
-                Console.WriteLine("Username already exists, please choose another.");
+                Console.WriteLine("Someone with that name is already using the app. Choose another name.");
                 validInput = false;
             }
             else
             {
                 existingUser = UserController.CreateUser(userInput);
-                Console.WriteLine("Profile created!");
+                Console.WriteLine("You've been added!");
                 validInput = true;
 
             }
@@ -115,19 +121,19 @@ public class MainMenu
 
         do
         {
-            Console.WriteLine("Please enter a username: ");
+            Console.WriteLine("What is your name?");
 
             userInput = Console.ReadLine() ?? "";
             userInput = userInput.Trim();
 
             if (String.IsNullOrEmpty(userInput))
             {
-                Console.WriteLine("Username cannot be blank, please try again.");
+                Console.WriteLine("Surely you have a name. Try again.");
                 validInput = false;
             }
             else if (!UserController.UserExists(userInput))
             {
-                Console.WriteLine("Username doesn't exist, please choose another.");
+                Console.WriteLine($"Sorry, {userInput}'s not here. Try another name.");
                 validInput = false;
             }
             else
@@ -137,6 +143,7 @@ public class MainMenu
                 Console.WriteLine($"Username: {existingUser.userName}");
                 Console.WriteLine($"User Id: {existingUser.userId}");
                 validInput = true;
+                Console.Clear();
             }
         } while (!validInput);
     }
