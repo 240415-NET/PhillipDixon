@@ -5,7 +5,6 @@ namespace GameTracker.Presentation;
 
 public class GameMenu
 {
-
     public static void GameFunctionMenu(User user)
     {
         string userInput;
@@ -15,8 +14,9 @@ public class GameMenu
         {
             do
             {
-                //Console.Clear();
-                Console.Write("Please select from the following Options:\n1. View List of Games\n2. New Game\n3. Remove Game\n4. Modify Game\n5. Exit Game Tracker\n");
+                Console.Clear();
+                Console.Write("Please select from the following Options:\n\n1. View List of Games\n2. New Game\n3. Remove Game\n4. Modify Game\n");
+                Console.Write("5. Choose a random game to play\n\n6. Exit Game Tracker\n");
 
                 userInput = Console.ReadLine().Trim().ToLower();
                 switch (userInput)
@@ -34,6 +34,9 @@ public class GameMenu
                         ModifyGameMenu(user);
                         break;
                     case "5":
+                        GetRandomGame(user);
+                        break;
+                    case "6":
                         Console.WriteLine("Thanks for using the GameTracker app! Bye!");
                         return;
                     default:
@@ -71,9 +74,9 @@ public class GameMenu
                 Console.WriteLine("Game added!");
                 //GameFunctionMenu(user);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                //Console.Clear();
+                Console.Clear();
                 Console.WriteLine("Please key in a valid input!");
             }
         }
@@ -86,7 +89,7 @@ public class GameMenu
         bool exitViewMenu = false;
         do
         {
-            //Console.Clear();
+            Console.Clear();
             Console.WriteLine("Choose an option");
             Console.WriteLine("1. View my Games");
             Console.WriteLine("2. Back to Main Menu");
@@ -122,7 +125,6 @@ public class GameMenu
                 catch (Exception e)
                 {
                     Console.WriteLine(e.Message);
-                    Console.WriteLine(e.StackTrace.ToString());
                     Console.ReadKey();
                 }
             }
@@ -141,7 +143,7 @@ public class GameMenu
             bool exitView = false;
             do
             {
-                //Console.Clear();
+                Console.Clear();
                 int loopCount = 1;
                 foreach (Game Game in allMyGames)
                 {
@@ -187,7 +189,7 @@ public class GameMenu
     public static void ViewSpecifiedGameDetails(Guid userID, Game Game)
     {
         List<Game> allMyGames = GameController.GetGames(userID);
-        //Console.Clear();
+        Console.Clear();
         Console.WriteLine(Game);
         Console.ReadKey();
     }
@@ -202,10 +204,7 @@ public class GameMenu
     }
         public static void ModifyGameMenu(User user)
     {
-        //List<Game> allUsersGames = GameController.GetGames(user.userId);
-
         Game gameToBeModified = ViewMyGames(user.userId, 1, "Please select the game you'd like to modify");
-        //Game? gameToBeModified = allUsersGames.FirstOrDefault(x => x.gameId.Equals(modifyGameId));
         ModifyIndividualGameDisplay(gameToBeModified, user);
     }
     public static void ModifyIndividualGameDisplay(Game gameToBeModified, User user)
@@ -274,5 +273,14 @@ public class GameMenu
         while (keepModifying || !isValid);
 
         GameController.ModifyGame(modifiedGame);
+    }
+        public static void GetRandomGame(User user)  
+    {
+        List<Game> allMyGames = GameController.GetGames(user.userId);
+        Random rnd = new();
+        int listNumber = rnd.Next(allMyGames.Count);
+        Game randomGame = allMyGames[listNumber];
+        Console.Clear();
+        Console.WriteLine($"\n\nLooks like you're playing {randomGame.gameName}!\n\n");
     }
 }

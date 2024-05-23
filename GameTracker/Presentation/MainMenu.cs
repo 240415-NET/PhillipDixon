@@ -14,6 +14,7 @@ public class MainMenu
         string userChoice = "";
         bool validInput = true;
 
+        Console.Clear();
         Console.WriteLine("Welcome to Gametracker!");
         Console.WriteLine("   .-------.    ______");
         Console.WriteLine("  /   o   /|   /\\     \\");
@@ -40,6 +41,8 @@ public class MainMenu
                     case "1":
                         GameTrackerManual.UsageInstructions();
                         validInput = false;
+                        Console.WriteLine("Choose an option to continue:");
+                        Console.WriteLine("2. New User 3. Returning User 4. Exit Program");
                         break;
                     case "2":
                         UserCreationMenu();

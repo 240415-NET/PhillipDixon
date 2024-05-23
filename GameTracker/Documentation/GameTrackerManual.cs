@@ -1,4 +1,6 @@
 
+using System.Runtime.InteropServices;
+
 namespace GameTracker.Documentation;
 
 class GameTrackerManual
@@ -12,9 +14,7 @@ class GameTrackerManual
         Console.WriteLine("You will be taken to the Game Menu once you have created a new user or logged in as an existing user.\n");
         Console.WriteLine("On the Game Menu, you can choose to view your exisiting game list, add a new game, or modify the name of an existing one.");
         Console.WriteLine("For a new game, you will enter the game's name, its price, and the date of purchase");
-        Console.WriteLine("Modify game will allow you to update the game's stored data.\n\n");
-        Console.WriteLine("Choose an option to continue:");
-        Console.WriteLine("2. New User 3. Returning User 4. Exit Program");
-        Console.Read();
+        Console.WriteLine("Modify game will allow you to update the game's stored data.");
+        Console.WriteLine("If you want to play a game but cna't make up your mind, let GameTraker do it for you with the \"What should I play?\" Option!\n\n");
     }
 }

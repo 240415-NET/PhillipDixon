@@ -3,11 +3,11 @@ using System.Data.SqlClient;
 
 namespace GameTracker.Data;
 
-public class SqlGameStorage : IGameStorageRepo //need to determine whether I need a new entry in the interface
+public class SqlGameStorage : IGameStorageRepo
 {
     public static string connectionString = File.ReadAllText(@"C:\Users\U0K0JI\Training\SQLConnection.txt");
 
-    public List<Game> GetGames(Guid userID) //int listType was a 2nd argument for JSON; not sure if needed for SQL
+    public List<Game> GetGames(Guid userID)
     {
         List<Game> myReturnList = new();
 
@@ -115,11 +115,10 @@ public class SqlGameStorage : IGameStorageRepo //need to determine whether I nee
         catch (Exception e)
         {
             Console.WriteLine(e.Message);
-            Console.WriteLine(e.StackTrace.ToString());
         }
         finally
         {
             connection.Close();
         }
-    }    
+    } 
 }
