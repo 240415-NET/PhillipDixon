@@ -1,5 +1,3 @@
-using System;
-using System.Data.SqlClient;
 using GameTracker.Models;
 using GameTracker.Data;
 

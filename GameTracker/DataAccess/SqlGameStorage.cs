@@ -1,6 +1,5 @@
 using GameTracker.Models;
 using System.Data.SqlClient;
-using System.Resources;
 
 namespace GameTracker.Data;
 
@@ -69,7 +68,6 @@ public class SqlGameStorage : IGameStorageRepo //need to determine whether I nee
         sqlCommand.Parameters.AddWithValue("@gameName", newGame.gameName);
         sqlCommand.Parameters.AddWithValue("@originalCost", newGame.originalCost);
         sqlCommand.Parameters.AddWithValue("@purchaseDate", newGame.purchaseDate);
-
         sqlCommand.ExecuteNonQuery();
 
         connection.Close();
@@ -85,10 +83,8 @@ public class SqlGameStorage : IGameStorageRepo //need to determine whether I nee
             string query = @"DELETE FROM dbo.Games WHERE gameId = @removeGameId";
 
             using SqlCommand command = new SqlCommand(query, connection);
-            {
                 command.Parameters.AddWithValue("@removeGameId", removeGame.gameId);
                 command.ExecuteNonQuery();
-            }
         }
         catch (Exception e)
         {
@@ -114,7 +110,6 @@ public class SqlGameStorage : IGameStorageRepo //need to determine whether I nee
             command.Parameters.AddWithValue("@neworiginalCost", modifiedGame.originalCost);
             command.Parameters.AddWithValue("@newpurchaseDate", modifiedGame.purchaseDate);
             command.Parameters.AddWithValue("@passedgameId", modifiedGame.gameId);
-
             command.ExecuteNonQuery();
         }
         catch (Exception e)

@@ -1,6 +1,5 @@
 using GameTracker.Controllers;
 using GameTracker.Models;
-using System.Linq;
 
 namespace GameTracker.Presentation;
 
@@ -16,7 +15,7 @@ public class GameMenu
         {
             do
             {
-                Console.Clear();
+                //Console.Clear();
                 Console.Write("Please select from the following Options:\n1. View List of Games\n2. New Game\n3. Remove Game\n4. Modify Game\n5. Exit Game Tracker\n");
 
                 userInput = Console.ReadLine().Trim().ToLower();
@@ -74,7 +73,7 @@ public class GameMenu
             }
             catch (Exception e)
             {
-                Console.Clear();
+                //Console.Clear();
                 Console.WriteLine("Please key in a valid input!");
             }
         }
@@ -87,7 +86,7 @@ public class GameMenu
         bool exitViewMenu = false;
         do
         {
-            Console.Clear();
+            //Console.Clear();
             Console.WriteLine("Choose an option");
             Console.WriteLine("1. View my Games");
             Console.WriteLine("2. Back to Main Menu");
@@ -142,7 +141,7 @@ public class GameMenu
             bool exitView = false;
             do
             {
-                Console.Clear();
+                //Console.Clear();
                 int loopCount = 1;
                 foreach (Game Game in allMyGames)
                 {
@@ -188,7 +187,7 @@ public class GameMenu
     public static void ViewSpecifiedGameDetails(Guid userID, Game Game)
     {
         List<Game> allMyGames = GameController.GetGames(userID);
-        Console.Clear();
+        //Console.Clear();
         Console.WriteLine(Game);
         Console.ReadKey();
     }

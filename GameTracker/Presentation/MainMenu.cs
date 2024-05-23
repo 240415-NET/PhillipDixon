@@ -115,7 +115,6 @@ public class MainMenu
             Console.WriteLine("Please enter a username: ");
 
             userInput = Console.ReadLine() ?? "";
-
             userInput = userInput.Trim();
 
             if (String.IsNullOrEmpty(userInput))
