@@ -22,7 +22,7 @@ public class Game
 
     public override string ToString()
     {
-        return $"Category: {gameName}\nOriginal Cost: {originalCost}\nPurchase Date: {purchaseDate}";
+        return $"Game Name: {gameName}\nOriginal Cost: {originalCost}\nPurchase Date: {purchaseDate}";
     }
     public string AbbrToString()
     {
