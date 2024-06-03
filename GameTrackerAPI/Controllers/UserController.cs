@@ -15,11 +15,13 @@ public class UserController : ControllerBase
     }
     
     [HttpPost]
-    public async Task<ActionResult<User>> PostNewUser(User newUserSentFromFrontEnd)
+    public async Task<ActionResult<User>> PostNewUser(string username)
     {
         try
         {
-            await _userService.CreateNewUserAsync(newUserSentFromFrontEnd);
+            User newUser = new User(username);
+
+            await _userService.CreateNewUserAsync(newUser);
 
             return Ok(newUser);
         }
@@ -28,4 +30,20 @@ public class UserController : ControllerBase
             return BadRequest(e.Message);
         }
     }
+
+    [HttpGet]
+    public async Task<ActionResult<User>> GetUserByUsername(string usernameToFind)
+    {
+        try
+        {
+            return await _userService.GetUserByUsernameAsync(usernameToFind);
+        }
+        catch(Exception e)
+        {
+            return NotFound(e.Message);
+        }
+    }
+
+
+
 }
