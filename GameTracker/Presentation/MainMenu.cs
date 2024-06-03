@@ -14,6 +14,7 @@ public class MainMenu
         string userChoice = "";
         bool validInput = true;
 
+//clear the console of any of the "yellow messages" that appear on run
         Console.Clear();
         Console.ForegroundColor = ConsoleColor.Blue;
         Console.WriteLine("***************************");
@@ -61,13 +62,14 @@ public class MainMenu
         {
             try
             {
+                //used a string for userChoice instead of an int because I had planned to add an "easter egg" that was a word, but never did get to it. 
                 userChoice = Console.ReadLine().Trim().ToLower();
                 validInput = true;
 
                 switch (userChoice)
                 {
                     case "1":
-                        GameTrackerManual.UsageInstructions();
+                        GameTrackerManual.UsageInstructions();//currently only thing on "documentation layer"
                         validInput = false;
                         Console.WriteLine("Choose an option to continue:");
                         Console.WriteLine("2. New User 3. Returning User 4. Exit Program");
