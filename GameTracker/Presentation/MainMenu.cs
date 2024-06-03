@@ -69,17 +69,17 @@ public class MainMenu
                 switch (userChoice)
                 {
                     case "1":
-                        GameTrackerManual.UsageInstructions();//currently only thing on "documentation layer"
+                        GameTrackerManual.UsageInstructions();//currently only item in "Documentataion layer"
                         validInput = false;
                         Console.WriteLine("Choose an option to continue:");
                         Console.WriteLine("2. New User 3. Returning User 4. Exit Program");
                         break;
                     case "2":
-                        UserCreationMenu();
+                        UserCreationMenu();// currently another method in main menu.cs; may see if breaking onto a new sheet is better
                         GameMenu.GameFunctionMenu(existingUser);
                         break;
                     case "3":
-                        UserLoginMenu();
+                        UserLoginMenu();// currently another method in main menu.cs; may see if breaking onto a new sheet is better
                         GameMenu.GameFunctionMenu(existingUser);
                         break;
                     case "4":
@@ -100,8 +100,6 @@ public class MainMenu
             }
 
         } while (!validInput);
-
-
     }
     public static void UserCreationMenu()
     {
@@ -112,7 +110,7 @@ public class MainMenu
         {
             Console.WriteLine("What is your name?");
 
-            userInput = Console.ReadLine() ?? "";
+            userInput = Console.ReadLine() ?? "";//ensures hitting enter with no entered chars returns as an empty string
 
             userInput = userInput.Trim();
 
@@ -128,7 +126,7 @@ public class MainMenu
             }
             else
             {
-                existingUser = UserController.CreateUser(userInput);
+                existingUser = UserController.CreateUser(userInput);//call to the controller layer after input validation
                 Console.WriteLine("You've been added!");
                 validInput = true;
 
@@ -136,8 +134,6 @@ public class MainMenu
 
         } while (!validInput);
     }
-
-
     public static void UserLoginMenu()
     {
         bool validInput = true;
@@ -147,7 +143,7 @@ public class MainMenu
         {
             Console.WriteLine("What is your name?");
 
-            userInput = Console.ReadLine() ?? "";
+            userInput = Console.ReadLine() ?? ""; //ensures hitting enter with no entered chars returns as an empty string
             userInput = userInput.Trim();
 
             if (String.IsNullOrEmpty(userInput))
@@ -162,7 +158,7 @@ public class MainMenu
             }
             else
             {
-                existingUser = UserController.ReturnUser(userInput);
+                existingUser = UserController.ReturnUser(userInput);//call to the controller layer after input validation
                 Console.WriteLine("You're logged in!");
                 Console.WriteLine($"Username: {existingUser.userName}");
                 Console.WriteLine($"User Id: {existingUser.userId}");
