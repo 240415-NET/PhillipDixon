@@ -1,7 +1,10 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace GameTracker.API.Models;
 
 public class User 
 {
+    [Key]
     public Guid userId {get; set;}
     public string userName {get; set;}
     public List<Game> games {get; set;} = new();

@@ -1,5 +1,6 @@
 using GameTracker.API.Models;
 using GameTracker.API.Data;
+using System.Linq.Expressions;
 
 namespace GameTracker.API.Services;
 
@@ -14,7 +15,7 @@ public class UserService : IUserService
 
     public async Task<User> CreateNewUserAsync(User newUserFromController)
     {
-        if (UserExists(newUserFromController.userName) == true)
+        if (await UserExistsAsync(newUserFromController.userName) == true)
         {
             throw new Exception("User already Exists.");
         }
@@ -40,23 +41,45 @@ public class UserService : IUserService
         {
             User? foundUser = await _userStorage.GetUserFromDBByUsernameAsync(usernameToFindFromController);
 
-            if(foundUser == null)
+            if (foundUser == null)
             {
                 throw new Exception("User wasn't found in the database.");
             }
             return foundUser;
 
         }
+        catch (Exception e)
+        {
+            throw new Exception(e.Message);
+        }
+    }
+    public async Task<string> DeleteUserByUsernameAsync(string usernameToDeleteFromController)
+    {
+        try
+        {
+            if (await UserExistsAsync(usernameToDeleteFromController) == true)
+            {
+                await _userStorage.DeleteUserFromDBAsync(usernameToDeleteFromController);
+            }
+            else
+            {
+                throw new Exception("User doesn't exist, so we cannot delete it");
+            }
+
+            return usernameToDeleteFromController;
+        }
         catch(Exception e)
         {
             throw new Exception(e.Message);
         }
     }
-
-    public bool UserExists(string userName)
+    public async Task<bool> UserExistsAsync(string usernameToFindFromController)
     {
-        return false;
+        return await _userStorage.DoesThisUserExistOnDBAsync(usernameToFindFromController);
     }
 
-
+    public async Task<string> UpdateUserByUsernameAsync(UsernameUpdateDTO usernameToSwapFromController)
+    {
+        return await _userStorage.UpdateUserInDBAsync(usernameToSwapFromController);
+    }
 }
